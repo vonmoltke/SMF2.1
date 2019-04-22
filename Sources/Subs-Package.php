@@ -3011,7 +3011,7 @@ function package_create_backup($id = 'backup')
 
 	$files = array();
 
-	$base_files = array('index.php', 'SSI.php', 'agreement.txt', 'cron.php', 'ssi_examples.php', 'ssi_examples.shtml', 'subscriptions.php');
+	$base_files = array('index.php', 'SSI.php', 'agreement.txt', 'cron.php', 'subscriptions.php');
 	foreach ($base_files as $file)
 	{
 		if (file_exists($boarddir . '/' . $file))
