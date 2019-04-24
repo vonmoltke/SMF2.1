@@ -28,7 +28,7 @@ if (!defined('SMF'))
 
 require_once('Sources/Class-Package.php');
 
-// Database info.
+// Database info.install_2-1_postgresql.sql
 $databases = array(
 	'mysql' => array(
 		'name' => 'MySQL',
@@ -194,49 +194,6 @@ function initialize_inputs()
 		<strong>', htmlspecialchars($_GET['pass_string']), '</strong>
 	</body>
 </html>';
-		exit;
-	}
-
-	// This is really quite simple; if ?delete is on the URL, delete the installer...
-	if (isset($_GET['delete']))
-	{
-		if (isset($_SESSION['installer_temp_ftp']))
-		{
-			$ftp = new ftp_connection($_SESSION['installer_temp_ftp']['server'], $_SESSION['installer_temp_ftp']['port'], $_SESSION['installer_temp_ftp']['username'], $_SESSION['installer_temp_ftp']['password']);
-			$ftp->chdir($_SESSION['installer_temp_ftp']['path']);
-
-			$ftp->unlink('install.php');
-
-			foreach ($databases as $key => $dummy)
-			{
-				$type = ($key == 'mysqli') ? 'mysql' : $key;
-				$ftp->unlink('install_' . DB_SCRIPT_VERSION . '_' . $type . '.sql');
-			}
-
-			$ftp->close();
-
-			unset($_SESSION['installer_temp_ftp']);
-		}
-		else
-		{
-			@unlink(__FILE__);
-
-			foreach ($databases as $key => $dummy)
-			{
-				$type = ($key == 'mysqli') ? 'mysql' : $key;
-				@unlink(dirname(__FILE__) . '/install_' . DB_SCRIPT_VERSION . '_' . $type . '.sql');
-			}
-		}
-
-		// Now just redirect to a blank.png...
-		$secure = false;
-
-		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
-			$secure = true;
-		elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on')
-			$secure = true;
-
-		header('location: http' . ($secure ? 's' : '') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']) . dirname($_SERVER['PHP_SELF']) . '/Themes/default/images/blank.png');
 		exit;
 	}
 
