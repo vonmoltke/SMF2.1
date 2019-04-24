@@ -1,18 +1,9 @@
 # SMF Generated Files #
 #######################
-Settings.php
 Settings_bak.php
 Settings_org.php
 db_last_error.php
-cache/data*.php
-Packages/backups/*
-Packages/temp
 *.*~
-Packages/*.tgz
-Packages/*.tar.gz
-Packages/*.zip
-Packages/*/
-attachments/
 /upgrade.php
 Themes/default/css/minified*.css
 Themes/default/scripts/minified*.js
@@ -45,8 +36,6 @@ Themes/default/scripts/minified_deferred*.js
 # Logs and databases #
 ######################
 *.log
-*.sql
-*.sqlite
 *.session
 
 # OS generated files #
@@ -66,3 +55,4 @@ Thumbs.db
 Themes/default/scripts/minified.js
 Themes/default/css/minified.css
 upgrade-helper.php
+deploy/
